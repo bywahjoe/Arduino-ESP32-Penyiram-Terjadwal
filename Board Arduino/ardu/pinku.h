@@ -4,3 +4,4 @@
 
 #define pinServo 9
 #define relay 8
+#define flow 2
