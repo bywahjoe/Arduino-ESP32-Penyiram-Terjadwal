@@ -26,6 +26,7 @@ int satas, sbawah;
 //Milis Setting
 const long interval = 1000;
 unsigned long before = 0;
+unsigned long beforeRelay = 0;
 
 void pulseCounter()
 {
@@ -89,17 +90,21 @@ attachInterrupt(sensorInt, pulseCounter, FALLING);
 
     } else if (recv == 'n') {
       pompaON();
-      delay(5000);
-      pompaOFF();
+      beforeRelay=millis();
     } else {
 
     }
   }
+  
   unsigned long now = millis();
   if (now - before >= interval) {
     tampil();
     before = now;
   }
+  if(now - beforeRelay>=15000){
+    pompaOFF();
+  }
+  
   //  buka();
   //  Serial.println("buka");
   //  delay(4000);
